@@ -1,24 +1,12 @@
-import { NextFunction, Request, Response } from 'express'
 import { Schema } from 'zod'
-
 import { log } from '@/libs/logger'
+import { RequestValidationError } from '@/errors/request-validation-error'
 
-/**
- * Refer http://json-schema.org/understanding-json-schema/UnderstandingJSONSchema.pdf to build proper schemas
- */
-export const validateRequest = async (
-  req: Request,
-  _: Response,
-  next: NextFunction,
-  schema: Schema,
-  payload: any
-) => {
-  log.info('Validator Validating :::', { path: req.path, schema, payload })
+export function validateRequest<T>(schema: Schema<T>, payload: any, instance: string) {
+  log.info('Validator Validating :::', { schema, payload })
 
-  // const finalSchema = { ...baseSchema, required: Object.keys(schema), properties: { ...schema } }
+  const info = schema.safeParse(payload)
+  if (info.success) return info.data
 
-  // const isValid: boolean = await ajv.validate(finalSchema, payload)
-  // const valErrors = !isValid ? ajv.errors : []
-
-  // if (!isValid) throw new RequestValidationError(valErrors as ErrorObject[])
+  throw new RequestValidationError(instance, info.error)
 }

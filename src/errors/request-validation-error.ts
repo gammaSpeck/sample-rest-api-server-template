@@ -1,31 +1,27 @@
+import { ZodError } from 'zod'
 import { CustomError } from './custom-error'
 
 export class RequestValidationError extends CustomError {
-  statusCode = 422
+  statusCode = 400
   // IANA reference
-  type = 'https://www.rfc-editor.org/rfc/rfc9110.html#name-422-unprocessable-content'
+  type = 'https://www.rfc-editor.org/rfc/rfc9110.html#name-400-bad-request'
 
   constructor(
     public instance: string,
-    public errors: any[]
+    public error: ZodError
   ) {
     super('Unprocessable Content')
+    Object.setPrototypeOf(this, RequestValidationError.prototype)
   }
 
   serializeErrors() {
     return {
       type: this.type,
-      title: 'Unprocessable Content',
+      title: 'Bad Request',
       status: this.statusCode,
-      detail:
-        'The server understands the content type of the request entity, but was unable to process the contained instructions.',
-      instance: this.instance
-      //
-      // errors: {
-      //   email: ['Email format is invalid.'],
-      //   password: ['Password must be at least 8 characters long.'],
-      //   username: ['Username is required.']
-      // }
+      detail: 'The request could not be processed due to invalid request',
+      instance: this.instance,
+      validationErrors: this.error.errors
     }
   }
 }

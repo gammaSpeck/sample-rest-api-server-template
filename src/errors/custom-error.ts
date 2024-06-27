@@ -1,3 +1,5 @@
+import { ZodIssue } from 'zod'
+
 /** `RFC 7807`: Problem Details for HTTP APIs */
 export interface ProblemDetails {
   /** A URI reference [RFC3986] that identifies the problem type */
@@ -17,7 +19,7 @@ export interface ProblemDetails {
 /** `RFC 9457`: HTTP Problem Details extensions */
 export interface ExtendedProblemDetails extends ProblemDetails {
   /** A list of specific errors related to the request's fields */
-  errors?: { [field: string]: string[] }
+  validationErrors?: ZodIssue[]
 }
 
 export abstract class CustomError extends Error {

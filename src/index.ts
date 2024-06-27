@@ -2,9 +2,9 @@
 
 import http from 'http'
 
-import configs from './configs'
+import configs from '@/configs'
 import { app } from './app'
-import { log } from './libs/logger'
+import { log } from '@/libs/logger'
 
 const { host, port } = configs
 

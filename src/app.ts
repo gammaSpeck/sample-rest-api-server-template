@@ -4,12 +4,12 @@ import helmet from 'helmet'
 import compression from 'compression'
 import { json } from 'body-parser'
 
-import { mErrorHandler } from './middlewares/error-handler'
-import { SuccessResponse } from './libs/success-response'
-import { NotFoundError } from './errors/not-found-error'
+import { SuccessResponse } from '@/libs/success-response'
+import { NotFoundError } from '@/errors/not-found-error'
+import { mInitCLS } from '@/middlewares/cls'
+import { mErrorHandler } from '@/middlewares/error-handler'
 
 import { allRoutes } from './routes'
-import { mInitCLS } from './middlewares/cls'
 
 const app = express()
 

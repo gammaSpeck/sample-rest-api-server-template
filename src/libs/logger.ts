@@ -3,7 +3,7 @@ import winston, { format, transports } from 'winston'
 import JsonStringifySafe from 'json-stringify-safe'
 import { serializeError } from 'serialize-error'
 
-import { configs } from '@/configs'
+import configs from '@/configs'
 
 const { combine, timestamp, printf, colorize } = format
 
@@ -14,14 +14,14 @@ const stringify = (obj: any) => JsonStringifySafe(obj, bufferSerializer)
 
 // Colored logs appear only in dev
 const shouldColorize: winston.Logform.Colorizer[] =
-  configs().nodeEnv !== 'production' ? [colorize()] : []
+  configs.nodeEnv !== 'production' ? [colorize()] : []
 
 const logFormats = combine(
   ...shouldColorize,
   timestamp(),
   printf((log) => {
-    const NS = getNamespace(configs().cls.namespace)
-    const corrId = (NS?.get(configs().cls.correlationIdField) || '') as string
+    const NS = getNamespace(configs.cls.namespace)
+    const corrId = (NS?.get(configs.cls.correlationIdField) || '') as string
 
     const errorLog = log.error ? `\n - [ERROR] ::  ${stringify(serializeError(log.error))} \n` : ``
     const dataLog = log.data ? `- [DATA] :: ${stringify(log.data)}` : ``

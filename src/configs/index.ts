@@ -7,3 +7,5 @@ export const configs = () => ({
     correlationIdField: process.env.CORR_ID || 'x-correlation-id'
   }
 })
+
+export default configs()

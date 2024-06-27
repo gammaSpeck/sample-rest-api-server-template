@@ -10,12 +10,8 @@ const ENDPOINT = '/entity' as const
 
 router.post(ENDPOINT, async (req: Request, res: Response) => {
   log.info('Controller', ENDPOINT)
-
-  const info = validateRequest(UserPayloadSchema, req.body, req.path)
-
-  // const data = await yfAxios.get(ENDPOINT, queryParams)
-  console.log('info', info)
-  SuccessResponse.send({ res, data: info, status: 201 })
+  const user = validateRequest(UserPayloadSchema, req.body, req.path)
+  SuccessResponse.send({ res, data: user, status: 201 })
 })
 
 export { router as entityRoutes }

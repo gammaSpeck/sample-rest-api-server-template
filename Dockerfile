@@ -5,7 +5,7 @@ WORKDIR /app
 RUN corepack enable && corepack prepare pnpm@9.4.0 --activate
 
 # Copy and install dependencies
-COPY package.json pnpm-lock.json ./
+COPY package.json pnpm-lock.yaml ./
 RUN pnpm install
 
 # Copy the source code and build
@@ -24,10 +24,10 @@ WORKDIR /app
 COPY --from=build /app/node_modules ./node_modules
 COPY --from=build /app/dist ./dist
 COPY --from=build /app/package.json ./
-COPY --from=build /app/pnpm-lock.json ./
+COPY --from=build /app/pnpm-lock.yaml ./
 
 EXPOSE 3000
 
 ENV NODE_ENV=production
 
-CMD ["pnpm", "start"]
+CMD ["npm", "start"]

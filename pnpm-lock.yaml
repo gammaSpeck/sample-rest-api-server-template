@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      body-parser:
-        specifier: ^1.20.2
-        version: 1.20.2
       cls-hooked:
         specifier: ^4.2.2
         version: 4.2.2
@@ -42,9 +39,6 @@ importers:
         specifier: ^3.23.8
         version: 3.23.8
     devDependencies:
-      '@types/body-parser':
-        specifier: ^1.19.5
-        version: 1.19.5
       '@types/cls-hooked':
         specifier: ^4.3.8
         version: 4.3.8

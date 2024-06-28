@@ -2,7 +2,6 @@ import express, { type Request, type Response } from 'express'
 import 'express-async-errors' // This handles all async errors seamlessly
 import helmet from 'helmet'
 import compression from 'compression'
-import { json } from 'body-parser'
 
 import { SuccessResponse } from '@/libs/success-response'
 import { NotFoundError } from '@/errors/not-found-error'
@@ -13,7 +12,7 @@ import { allRoutes } from './routes'
 
 const app = express()
 
-app.use(json())
+app.use(express.json())
 app.use(helmet())
 app.use(compression())
 

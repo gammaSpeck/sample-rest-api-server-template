@@ -20,6 +20,7 @@ export interface ProblemDetails {
 export interface ExtendedProblemDetails extends ProblemDetails {
   /** A list of specific errors related to the request's fields */
   validationErrors?: ZodIssue[]
+  errors?: any[]
 }
 
 export abstract class CustomError extends Error {

@@ -10,7 +10,7 @@ export class RequestValidationError extends CustomError {
     public instance: string,
     public error: ZodError
   ) {
-    super('Unprocessable Content')
+    super('Bad Request')
     Object.setPrototypeOf(this, RequestValidationError.prototype)
   }
 
